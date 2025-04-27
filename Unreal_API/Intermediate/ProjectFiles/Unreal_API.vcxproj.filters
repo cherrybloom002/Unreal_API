@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\Unreal_API.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Unreal_API.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\Unreal_APIEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{BB38096A-B391-30DC-A0D4-4F3EA6B44507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\QuickActions">
+      <UniqueIdentifier>{A0F5A026-B069-3C4D-A703-E0535B58D0CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\QuickActions\Source">
+      <UniqueIdentifier>{7781C592-B675-3AD3-A4E4-B2D22BE8FB80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions">
+      <UniqueIdentifier>{2BA1F900-E04A-367C-9FBE-976266E6864A}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\QuickActions\Source\QuickActions\QuickActions.Build.cs">
+      <Filter>Plugins\QuickActions\Source\QuickActions</Filter>
+    </None>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions\Private">
+      <UniqueIdentifier>{A76F1081-EA39-343E-A398-B5F3CFA1110C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\QuickActions.cpp">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions\Public">
+      <UniqueIdentifier>{D44EDDEE-2359-3A26-BDAE-C60BAFE50789}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\QuickActions.h">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Public</Filter>
+    </ClInclude>
+    <None Include="..\..\Plugins\QuickActions\QuickActions.uplugin">
+      <Filter>Plugins\QuickActions</Filter>
+    </None>
+    <Filter Include="Plugins\QuickActions\Resources">
+      <UniqueIdentifier>{EC7D8704-91FB-38C5-B162-0157C3CF6C5A}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\QuickActions\Resources\Icon128.png">
+      <Filter>Plugins\QuickActions\Resources</Filter>
+    </None>
+    <Filter Include="Source\Unreal_API">
+      <UniqueIdentifier>{CEFA3661-217C-397A-85D7-0CFC0960AFB2}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Unreal_API\Unreal_API.Build.cs">
+      <Filter>Source\Unreal_API</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Unreal_API\Unreal_API.cpp">
+      <Filter>Source\Unreal_API</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Unreal_API\Unreal_API.h">
+      <Filter>Source\Unreal_API</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

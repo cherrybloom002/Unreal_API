@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Unreal_API",
+			"Path": "..\\Source\\Unreal_API.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "Unreal_APIEditor",
+			"Path": "..\\Source\\Unreal_APIEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

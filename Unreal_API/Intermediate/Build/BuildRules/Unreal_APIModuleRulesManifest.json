@@ -1,0 +1,9 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\acer\\Desktop\\Projects\\Unreal\\Unreal_API\\Unreal_API\\Source\\Unreal_API\\Unreal_API.Build.cs",
+		"C:\\Users\\acer\\Desktop\\Projects\\Unreal\\Unreal_API\\Unreal_API\\Plugins\\QuickActions\\Source\\QuickActions\\QuickActions.Build.cs",
+		"C:\\Users\\acer\\Desktop\\Projects\\Unreal\\Unreal_API\\Unreal_API\\Source\\Unreal_API.Target.cs",
+		"C:\\Users\\acer\\Desktop\\Projects\\Unreal\\Unreal_API\\Unreal_API\\Source\\Unreal_APIEditor.Target.cs"
+	],
+	"EngineVersion": "5.4.4"
+}
