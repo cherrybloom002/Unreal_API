@@ -11,6 +11,7 @@
     <None Include="..\..\Source\Unreal_APIEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
@@ -48,11 +49,23 @@
     <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\QuickActions.cpp">
       <Filter>Plugins\QuickActions\Source\QuickActions\Private</Filter>
     </ClCompile>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions\Private\AssetActions">
+      <UniqueIdentifier>{2A8013C5-EA42-3449-92E2-FCB0E79A1041}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\AssetActions\QuickAssetAction.cpp">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Private\AssetActions</Filter>
+    </ClCompile>
     <Filter Include="Plugins\QuickActions\Source\QuickActions\Public">
       <UniqueIdentifier>{D44EDDEE-2359-3A26-BDAE-C60BAFE50789}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\QuickActions.h">
       <Filter>Plugins\QuickActions\Source\QuickActions\Public</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions\Public\AssetActions">
+      <UniqueIdentifier>{E788237A-22CF-38D8-8129-CDEFABA08FDA}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\AssetActions\QuickAssetAction.h">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Public\AssetActions</Filter>
     </ClInclude>
     <None Include="..\..\Plugins\QuickActions\QuickActions.uplugin">
       <Filter>Plugins\QuickActions</Filter>
@@ -74,6 +87,11 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\Unreal_API\Unreal_API.h">
       <Filter>Source\Unreal_API</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\DebugHeader.h">
+      <Filter>Plugins\QuickActions\Source\QuickActions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,7 +5,18 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
-				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset"
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/StarterContent/Blueprints/Blueprint_CeilingLight.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Plugins/QuickActions/Content/BP_QuickActions.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/BP_Foo.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/M_Test_Mat.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/MI_M_Test_Mat_Inst.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/M_Test_Mat_Mk1.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/M_Test_Mat_Mk2.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/MI_Test_Mat_Mk2.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/Foo.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/Foo_Mk1.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/Foo_Mk2.uasset",
+				"C:/Users/acer/Desktop/Projects/Unreal/Unreal_API/Unreal_API/Content/Test/Foo_Mk3.uasset"
 			]
 		}
 	]

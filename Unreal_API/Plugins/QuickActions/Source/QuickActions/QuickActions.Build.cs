@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using UnrealBuildTool.Rules;
 
 public class QuickActions : ModuleRules
 {
@@ -17,6 +18,7 @@ public class QuickActions : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
+                System.IO.Path.GetFullPath(Target.RelativeEnginePath)+"/Source/Editor/Blutility/Private"
 				// ... add other private include paths required here ...
 			}
 			);
@@ -26,6 +28,8 @@ public class QuickActions : ModuleRules
 			new string[]
 			{
 				"Core",
+                "Blutility",
+                "EditorScriptingUtilities",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
