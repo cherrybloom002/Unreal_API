@@ -25,6 +25,12 @@ public:
 	UFUNCTION(CallInEditor)
 	void FixPrefix();
 
+	UFUNCTION(CallInEditor)
+	void BatchRename(const FString& prefix = TEXT(""),
+					 const FString& suffix = TEXT(""), 
+					 const FString& prefixSeparator = TEXT(""), 
+					 const FString& sufficSeparator = TEXT(""));
+
 private:
 	TMap<UClass*, FString> prefixMap = {
 		{UBlueprint::StaticClass(), TEXT("BP_")},

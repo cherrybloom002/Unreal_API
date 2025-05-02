@@ -85,3 +85,73 @@ void UQuickAssetAction::FixPrefix()
 		LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets"));
 	}
 }
+
+void UQuickAssetAction::BatchRename(const FString& prefix, const FString& suffix, const FString& prefixSeparator, const FString& sufficSeparator)
+{
+	if (prefix.IsEmpty() && suffix.IsEmpty())
+	{
+		FixPrefix();
+		return;
+	}
+
+	TArray<UObject*> selectedAssets = UEditorUtilityLibrary::GetSelectedAssets();
+	uint32 counter = 0;
+
+	for (UObject* obj : selectedAssets)
+	{
+		if (!obj)
+		{
+			continue;
+		}
+
+		FString* epicGamesPrefix = prefixMap.Find(obj->GetClass());
+		if (!epicGamesPrefix || epicGamesPrefix->IsEmpty())
+		{
+			LogPrint(TEXT("Failed to find Epic Games prefix for class " + obj->GetClass()->GetName()));
+			continue;
+		}
+
+		const FString oldName = obj->GetName();
+		FString newName = oldName;
+
+		if (!prefix.IsEmpty())
+		{
+			if (oldName.StartsWith(*epicGamesPrefix))
+			{
+				LogPrint(TEXT("Already has a valid Epic Games prefix: " + oldName));
+				newName.InsertAt(epicGamesPrefix->Len(), (prefix + prefixSeparator));
+			}
+			else
+			{
+				newName.InsertAt(0, *epicGamesPrefix);
+				newName.InsertAt(epicGamesPrefix->Len(), (prefix + prefixSeparator));
+			}
+		}
+		else
+		{
+			if (oldName.StartsWith(*epicGamesPrefix))
+			{
+				LogPrint(TEXT("Already has a valid Epic Games prefix: " + oldName));
+			}
+			else
+			{
+				newName.InsertAt(0, *epicGamesPrefix);
+			}
+		}
+
+		if (!suffix.IsEmpty())
+		{
+			newName.Append(sufficSeparator + suffix);
+		}
+
+		UEditorUtilityLibrary::RenameAsset(obj, newName);
+		++counter;
+	}
+
+	if (counter > 0)
+	{
+		ShowNotifyInfo(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
+		LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
+	}
+}
+
