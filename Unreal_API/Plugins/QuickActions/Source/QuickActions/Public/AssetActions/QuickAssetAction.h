@@ -14,7 +14,6 @@ UCLASS()
 class QUICKACTIONS_API UQuickAssetAction : public UAssetActionUtility
 {
 	GENERATED_BODY()
-
 public:
 	UFUNCTION(CallInEditor)//function will be callable in editor
 	void TestAction();
@@ -31,10 +30,14 @@ public:
 					 const FString& prefixSeparator = TEXT(""), 
 					 const FString& sufficSeparator = TEXT(""));
 
+	UFUNCTION(CallInEditor)
+	void RemoveUnused();
 private:
 	TMap<UClass*, FString> prefixMap = {
 		{UBlueprint::StaticClass(), TEXT("BP_")},
 		{UMaterial::StaticClass(), TEXT("M_")},
 		{UMaterialInstanceConstant::StaticClass(), TEXT("MI_")}
 	};
+
+	void FixRedirectors();
 };

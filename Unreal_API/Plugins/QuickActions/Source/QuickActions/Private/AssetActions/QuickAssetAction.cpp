@@ -5,6 +5,10 @@
 #include "../DebugHeader.h"
 #include "EditorUtilityLibrary.h"
 #include "EditorAssetLibrary.h"
+#include "ObjectTools.h"
+#include "AssetToolsModule.h"
+#include "AssetViewUtils.h"
+#include "AssetRegistry/AssetRegistryModule.h"
 
 void UQuickAssetAction::TestAction()
 {
@@ -153,5 +157,67 @@ void UQuickAssetAction::BatchRename(const FString& prefix, const FString& suffix
 		ShowNotifyInfo(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
 		LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
 	}
+}
+
+void UQuickAssetAction::RemoveUnused()
+{
+	FixRedirectors();
+	TArray<FAssetData> selectedAssets = UEditorUtilityLibrary::GetSelectedAssetData();
+	TArray<FAssetData> unusedAssets;
+
+	for (const FAssetData& data : selectedAssets)
+	{
+		TArray<FString> references = UEditorAssetLibrary::FindPackageReferencersForAsset(data.ObjectPath.ToString());
+		if (references.Num() == 0) 
+		{
+			unusedAssets.Add(data);
+		}
+	}
+	if (unusedAssets.Num() == 0) {
+		ShowDialog(EAppMsgType::Ok, TEXT("No unused assets selected"));
+		return;
+	}
+	const int32 deletedObjs = ObjectTools::DeleteAssets(unusedAssets);
+	if (deletedObjs == 0) return;
+	ShowNotifyInfo(TEXT("Successfully deleted " + FString::FromInt(deletedObjs) + " unused assets!"));
+}
+
+void UQuickAssetAction::FixRedirectors()
+{
+	IAssetRegistry& AssetRegistry = FModuleManager::LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry")).Get();
+
+	FARFilter Filter;
+	Filter.bRecursivePaths = true;
+	Filter.PackagePaths.Emplace("/Game");
+	Filter.ClassPaths.Add(UObjectRedirector::StaticClass()->GetClassPathName());
+
+	TArray<FAssetData> AssetList;
+	AssetRegistry.GetAssets(Filter, AssetList);
+
+	if (AssetList.Num() == 0) return;
+
+	TArray<FString> ObjectPaths;
+
+	for (const FAssetData& data : AssetList)
+	{
+		ObjectPaths.Add(data.GetObjectPathString());
+	}
+
+	TArray<UObject*> objs;
+	bool Result = AssetViewUtils::LoadAssetsIfNeeded(ObjectPaths, objs, true, true);
+
+	if (Result)
+	{
+		TArray<UObjectRedirector*> Redirectors;
+		for (UObject* object : objs)
+		{
+			Redirectors.Add(CastChecked<UObjectRedirector>(object));
+		}
+		 
+		IAssetTools& AssetToolModule = FModuleManager::LoadModuleChecked<FAssetToolsModule>(TEXT("AssetsTools")).Get();
+
+		AssetToolModule.FixupReferencers(Redirectors);
+	}
+
 }
 

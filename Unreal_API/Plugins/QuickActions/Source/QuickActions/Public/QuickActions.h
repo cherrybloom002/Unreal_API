@@ -14,4 +14,10 @@ public:
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
+
+private:
+#pragma region ContentBrowserExtension
+	void InitCBExtension();
+	TSharedRef<FExtender> CustomCBExtender(const TArray<FString>& SelectedPaths);
+#pragma endregion
 };
