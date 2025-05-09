@@ -3,6 +3,10 @@
 #include "QuickActions.h"
 #include "ContentBrowserModule.h"
 #include "../DebugHeader.h"
+#include "EditorUtilityLibrary.h"
+#include "EditorAssetLibrary.h"
+#include "ObjectTools.h"
+
 #define LOCTEXT_NAMESPACE "FQuickActionsModule"
 
 DEFINE_LOG_CATEGORY(LogQuickActions)
@@ -34,7 +38,7 @@ TSharedRef<FExtender> FQuickActionsModule::CustomCBExtender(const TArray<FString
 	{
 		//1- Hook Menu
 		//2- MenuBuild
-		//3- Effettiva Funzione
+		//3- Function
 
 		/*2 Examples of Menu extensions:
 			The first one will be positioned as the first in the "Bulk Operations" cathegory
@@ -49,6 +53,7 @@ TSharedRef<FExtender> FQuickActionsModule::CustomCBExtender(const TArray<FString
 			TSharedPtr<FUICommandList>(),
 			FMenuExtensionDelegate::CreateRaw(this, &FQuickActionsModule::AddCBMenuEntry) //2- MenuBuild
 			);
+		SelectedFolderPaths = SelectedPaths;
 	}
 	return MenuExtender;
 }
@@ -61,9 +66,54 @@ void FQuickActionsModule::AddCBMenuEntry(FMenuBuilder& MenuBuilder)
 		FExecuteAction::CreateRaw(this, &FQuickActionsModule::OnDeleteUnusedAssetsClicked)
 	);
 }
-void FQuickActionsModule::OnDeleteUnusedAssetsClicked()
+void FQuickActionsModule::OnDeleteUnusedAssetsClicked()// 3- Function
 {
 	DebugHeader::ScreenPrint(TEXT("Clicked"), FColor::Purple);
+	if (SelectedFolderPaths.Num() > 1)
+	{
+		DebugHeader::ShowDialog(EAppMsgType::Ok, TEXT("Only one folder")); 
+		return;
+	}
+
+	TArray<FString> AssetsPath = UEditorAssetLibrary::ListAssets(SelectedFolderPaths[0]);
+	if (AssetsPath.Num() == 0)
+	{
+		DebugHeader::ShowDialog(EAppMsgType::Ok, TEXT("Empty Folder"));
+		return;
+	}
+	EAppReturnType::Type Confirmation = DebugHeader::ShowDialog(EAppMsgType::YesNo, TEXT("Found ") + FString::FromInt(AssetsPath.Num()) + TEXT("\nProceed?"));
+	if (Confirmation == EAppReturnType::No)
+	{
+		return;
+	}
+
+	TArray<FAssetData>UnusedAssets;
+	for (const FString& path : AssetsPath)
+	{
+		if (path.Contains(TEXT("Developers")) || path.Contains(TEXT("Collections")))
+		{
+			continue;
+		}
+		if (!UEditorAssetLibrary::DoesAssetExist(path))continue;
+
+		TArray<FString> References = UEditorAssetLibrary::FindPackageReferencersForAsset(path);
+
+		if (References.Num() ==0)
+		{
+			const FAssetData unusedData = UEditorAssetLibrary::FindAssetData(path);
+			UnusedAssets.Add(unusedData);
+		}
+	}
+	if (UnusedAssets.Num() > 0)
+	{
+		ObjectTools::DeleteAssets(UnusedAssets);
+	}
+	else
+	{
+		DebugHeader::ShowDialog(EAppMsgType::Ok, TEXT("No unused assets"));
+		return;
+	}
+
 }
 #pragma endregion
 
