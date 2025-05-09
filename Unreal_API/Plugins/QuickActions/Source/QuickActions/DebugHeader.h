@@ -4,34 +4,38 @@
 #include "Widgets/Notifications/SNotificationList.h"
 #include "Framework/Notifications/NotificationManager.h"
 
-void ScreenPrint(const FString& msg, const FColor& clr)
+namespace DebugHeader 
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 8.f, clr, msg);
-	}
-}
 
-void LogPrint(const FString& msg)
-{
-	UE_LOG(LogQuickActions, Log, TEXT("%s"), *msg);
-}
-
-EAppReturnType::Type ShowDialog(EAppMsgType::Type msgType,const FString & msg, bool bisWarning = true)
-{
-	if (bisWarning)
+	static void ScreenPrint(const FString& msg, const FColor& clr)
 	{
-		FText MsgTitle = FText::FromString(TEXT("Warning"));
-		return FMessageDialog::Open(msgType, FText::FromString(msg), MsgTitle);
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 8.f, clr, msg);
+		}
 	}
+
+	static void LogPrint(const FString& msg)
+	{
+		UE_LOG(LogQuickActions, Log, TEXT("%s"), *msg);
+	}
+
+	static EAppReturnType::Type ShowDialog(EAppMsgType::Type msgType,const FString & msg, bool bisWarning = true)
+	{
+		if (bisWarning)
+		{
+			FText MsgTitle = FText::FromString(TEXT("Warning"));
+			return FMessageDialog::Open(msgType, FText::FromString(msg), MsgTitle);
+		}
 	
-	return FMessageDialog::Open(msgType, FText::FromString(msg));
-}
+		return FMessageDialog::Open(msgType, FText::FromString(msg));
+	}
 
-void ShowNotifyInfo(const FString& msg)
-{
-	FNotificationInfo NotifyInfo(FText::FromString(msg));
-	NotifyInfo.bUseLargeFont = true;
-	NotifyInfo.FadeOutDuration = 5.f;
-	FSlateNotificationManager::Get().AddNotification(NotifyInfo);
+	static void ShowNotifyInfo(const FString& msg)
+	{
+		FNotificationInfo NotifyInfo(FText::FromString(msg));
+		NotifyInfo.bUseLargeFont = true;
+		NotifyInfo.FadeOutDuration = 5.f;
+		FSlateNotificationManager::Get().AddNotification(NotifyInfo);
+	}
 }

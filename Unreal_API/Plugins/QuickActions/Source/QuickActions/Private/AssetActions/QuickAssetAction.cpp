@@ -12,8 +12,8 @@
 
 void UQuickAssetAction::TestAction()
 {
-	ScreenPrint(TEXT("Work as Intended 2.0"), FColor::Purple);
-	LogPrint(TEXT("Work as intended but in log"));
+	DebugHeader::ScreenPrint(TEXT("Work as Intended 2.0"), FColor::Purple);
+	DebugHeader::LogPrint(TEXT("Work as intended but in log"));
 }
 
 void UQuickAssetAction::Duplicate(int32 numCopies)
@@ -21,8 +21,8 @@ void UQuickAssetAction::Duplicate(int32 numCopies)
 
 	if (numCopies <= 0) 
 	{
-		LogPrint(TEXT("Please Enter a valid number (>0)"));
-		ShowDialog(EAppMsgType::Ok, TEXT("Please Enter a valid number (>0)"));
+		DebugHeader::LogPrint(TEXT("Please Enter a valid number (>0)"));
+		DebugHeader::ShowDialog(EAppMsgType::Ok, TEXT("Please Enter a valid number (>0)"));
 		return;
 	}
 
@@ -48,8 +48,8 @@ void UQuickAssetAction::Duplicate(int32 numCopies)
 
 	if (counter > 0) 
 	{
-		ShowNotifyInfo(TEXT("Successfully created " + FString::FromInt(counter) + " assets"));
-		LogPrint(TEXT("Successfully created " + FString::FromInt(counter) + " assets"));
+		DebugHeader::ShowNotifyInfo(TEXT("Successfully created " + FString::FromInt(counter) + " assets"));
+		DebugHeader::LogPrint(TEXT("Successfully created " + FString::FromInt(counter) + " assets"));
 	}
 }
 
@@ -64,13 +64,13 @@ void UQuickAssetAction::FixPrefix()
 		FString* prefix = prefixMap.Find(obj->GetClass());
 		if (!prefix || prefix->IsEmpty()) 
 		{
-			LogPrint(TEXT("Failed to find prefix for class " + obj->GetClass()->GetName()));
+			DebugHeader::LogPrint(TEXT("Failed to find prefix for class " + obj->GetClass()->GetName()));
 			continue;
 		}
 		FString oldName = obj->GetName();
 		if (oldName.StartsWith(*prefix))
 		{
-			LogPrint(oldName +  TEXT(" already has a valid prefix"));
+			DebugHeader::LogPrint(oldName +  TEXT(" already has a valid prefix"));
 			continue;
 		}
 		if (obj->IsA<UMaterialInstanceConstant>())
@@ -85,8 +85,8 @@ void UQuickAssetAction::FixPrefix()
 
 	if (counter > 0)
 	{
-		ShowNotifyInfo(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets"));
-		LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets"));
+		DebugHeader::ShowNotifyInfo(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets"));
+		DebugHeader::LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets"));
 	}
 }
 
@@ -111,7 +111,7 @@ void UQuickAssetAction::BatchRename(const FString& prefix, const FString& suffix
 		FString* epicGamesPrefix = prefixMap.Find(obj->GetClass());
 		if (!epicGamesPrefix || epicGamesPrefix->IsEmpty())
 		{
-			LogPrint(TEXT("Failed to find Epic Games prefix for class " + obj->GetClass()->GetName()));
+			DebugHeader::LogPrint(TEXT("Failed to find Epic Games prefix for class " + obj->GetClass()->GetName()));
 			continue;
 		}
 
@@ -122,7 +122,7 @@ void UQuickAssetAction::BatchRename(const FString& prefix, const FString& suffix
 		{
 			if (oldName.StartsWith(*epicGamesPrefix))
 			{
-				LogPrint(TEXT("Already has a valid Epic Games prefix: " + oldName));
+				DebugHeader::LogPrint(TEXT("Already has a valid Epic Games prefix: " + oldName));
 				newName.InsertAt(epicGamesPrefix->Len(), (prefix + prefixSeparator));
 			}
 			else
@@ -135,7 +135,7 @@ void UQuickAssetAction::BatchRename(const FString& prefix, const FString& suffix
 		{
 			if (oldName.StartsWith(*epicGamesPrefix))
 			{
-				LogPrint(TEXT("Already has a valid Epic Games prefix: " + oldName));
+				DebugHeader::LogPrint(TEXT("Already has a valid Epic Games prefix: " + oldName));
 			}
 			else
 			{
@@ -154,8 +154,8 @@ void UQuickAssetAction::BatchRename(const FString& prefix, const FString& suffix
 
 	if (counter > 0)
 	{
-		ShowNotifyInfo(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
-		LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
+		DebugHeader::ShowNotifyInfo(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
+		DebugHeader::LogPrint(TEXT("Successfully renamed " + FString::FromInt(counter) + " assets!"));
 	}
 }
 
@@ -174,12 +174,12 @@ void UQuickAssetAction::RemoveUnused()
 		}
 	}
 	if (unusedAssets.Num() == 0) {
-		ShowDialog(EAppMsgType::Ok, TEXT("No unused assets selected"));
+		DebugHeader::ShowDialog(EAppMsgType::Ok, TEXT("No unused assets selected"));
 		return;
 	}
 	const int32 deletedObjs = ObjectTools::DeleteAssets(unusedAssets);
 	if (deletedObjs == 0) return;
-	ShowNotifyInfo(TEXT("Successfully deleted " + FString::FromInt(deletedObjs) + " unused assets!"));
+	DebugHeader::ShowNotifyInfo(TEXT("Successfully deleted " + FString::FromInt(deletedObjs) + " unused assets!"));
 }
 
 void UQuickAssetAction::FixRedirectors()

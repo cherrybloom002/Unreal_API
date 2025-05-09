@@ -19,5 +19,7 @@ private:
 #pragma region ContentBrowserExtension
 	void InitCBExtension();
 	TSharedRef<FExtender> CustomCBExtender(const TArray<FString>& SelectedPaths);
+	void AddCBMenuEntry(FMenuBuilder& MenuBuilder);
+	void OnDeleteUnusedAssetsClicked();
 #pragma endregion
 };
