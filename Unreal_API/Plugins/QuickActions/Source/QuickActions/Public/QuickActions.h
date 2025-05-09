@@ -25,4 +25,10 @@ private:
 	void AddCBMenuEntry(FMenuBuilder& MenuBuilder);
 	void OnDeleteUnusedAssetsClicked();
 #pragma endregion
+
+#pragma region SlateTest
+	void RegisterSlateTab();
+	void OnSpawnTabClicked();
+	TSharedRef<SDockTab> OnSpawnTestTab(const FSpawnTabArgs& args);
+#pragma endregion
 };
