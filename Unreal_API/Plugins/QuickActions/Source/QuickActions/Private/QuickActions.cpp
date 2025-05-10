@@ -7,6 +7,8 @@
 #include "EditorAssetLibrary.h"
 #include "ObjectTools.h"
 
+#include "SlateWidgets/MyCustomWidget.h"
+
 #define LOCTEXT_NAMESPACE "FQuickActionsModule"
 
 DEFINE_LOG_CATEGORY(LogQuickActions)
@@ -127,6 +129,10 @@ void FQuickActionsModule::OnDeleteUnusedAssetsClicked()// 3- Function
 	}
 
 }
+
+#pragma endregion
+#pragma region SlateTest
+
 void FQuickActionsModule::RegisterSlateTab()
 {
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
@@ -140,16 +146,20 @@ void FQuickActionsModule::OnSpawnTabClicked()
 }
 TSharedRef<SDockTab> FQuickActionsModule::OnSpawnTestTab(const FSpawnTabArgs& args)
 {
-	return SNew(SDockTab).TabRole(ETabRole::NomadTab);
+	return SNew(SDockTab).TabRole(ETabRole::NomadTab)
+		[
+			SNew(SMyCustomWidget).TestString(TEXT("Test Data passing"))
+		];
 }
+
 #pragma endregion
-#pragma region SlateTest
+
 void FQuickActionsModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
 }
-#pragma endregion
+
 #undef LOCTEXT_NAMESPACE
 	
 IMPLEMENT_MODULE(FQuickActionsModule, QuickActions)

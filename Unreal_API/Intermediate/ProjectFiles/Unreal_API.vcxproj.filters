@@ -40,6 +40,9 @@
     <Filter Include="Plugins\QuickActions\Source\QuickActions">
       <UniqueIdentifier>{2BA1F900-E04A-367C-9FBE-976266E6864A}</UniqueIdentifier>
     </Filter>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\DebugHeader.h">
+      <Filter>Plugins\QuickActions\Source\QuickActions</Filter>
+    </ClInclude>
     <None Include="..\..\Plugins\QuickActions\Source\QuickActions\QuickActions.Build.cs">
       <Filter>Plugins\QuickActions\Source\QuickActions</Filter>
     </None>
@@ -55,6 +58,12 @@
     <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\AssetActions\QuickAssetAction.cpp">
       <Filter>Plugins\QuickActions\Source\QuickActions\Private\AssetActions</Filter>
     </ClCompile>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets">
+      <UniqueIdentifier>{12ABCB10-4E0B-3492-8CBC-CD090572B8C6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets\MyCustomWidget.cpp">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets</Filter>
+    </ClCompile>
     <Filter Include="Plugins\QuickActions\Source\QuickActions\Public">
       <UniqueIdentifier>{D44EDDEE-2359-3A26-BDAE-C60BAFE50789}</UniqueIdentifier>
     </Filter>
@@ -66,6 +75,12 @@
     </Filter>
     <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\AssetActions\QuickAssetAction.h">
       <Filter>Plugins\QuickActions\Source\QuickActions\Public\AssetActions</Filter>
+    </ClInclude>
+    <Filter Include="Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets">
+      <UniqueIdentifier>{4AB53348-D779-3B43-9CBC-D527FCAAFF83}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets\MyCustomWidget.h">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets</Filter>
     </ClInclude>
     <None Include="..\..\Plugins\QuickActions\QuickActions.uplugin">
       <Filter>Plugins\QuickActions</Filter>
@@ -87,11 +102,6 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\Unreal_API\Unreal_API.h">
       <Filter>Source\Unreal_API</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\DebugHeader.h">
-      <Filter>Plugins\QuickActions\Source\QuickActions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
