@@ -2,7 +2,6 @@
 
 
 #include "SlateWidgets/MyCustomWidget.h"
-#include "Widgets/SSpinBox.h"
 void SMyCustomWidget::Construct(const FArguments& inArgs)
 {
 	bCanSupportFocus = true;
@@ -18,7 +17,7 @@ void SMyCustomWidget::Construct(const FArguments& inArgs)
 			.AutoHeight()
 			[
 				SNew(STextBlock)
-					.Text(FText::FromString(TEXT("My Custom Slate Tab")))
+					.Text(FText::FromString(inArgs._TestString))
 					.Font(TitleFont)
 					.ColorAndOpacity(FColor::White)
 					.Justification(ETextJustify::Center)
