@@ -15,4 +15,14 @@ public:
 private:
 	float TestValue;
 	float OnGetTestValue()const { return TestValue; }
+	FReply HandleButtonClick();
+	bool bIsChecked;
+	FString CurrentText;
+	void HandleTextChanged(const FText& newText);
+	void HandleTextCommitted(const FText& newText, ETextCommit::Type CommitType);
+	TArray<TSharedPtr<FString>> Options_CB;
+	TSharedPtr<FString> Selected_CB;
+	TSharedRef<SWidget> GenerateComboBoxItem(TSharedPtr<FString> item);
+	void HandleSelectionChanged(TSharedPtr<FString> NewSelection, ESelectInfo::Type SelectInfo);
+	FText GetCurrentSelectionCB() const;
 };
