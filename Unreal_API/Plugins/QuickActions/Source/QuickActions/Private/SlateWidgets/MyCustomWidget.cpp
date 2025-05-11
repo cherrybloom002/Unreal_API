@@ -3,6 +3,7 @@
 
 #include "SlateWidgets/MyCustomWidget.h"
 #include "../DebugHeader.h"
+#include "Widgets/Input/SSlider.h"
 void SMyCustomWidget::Construct(const FArguments& inArgs)
 {
 	bCanSupportFocus = true;
@@ -13,6 +14,11 @@ void SMyCustomWidget::Construct(const FArguments& inArgs)
 	Options_CB.Add(MakeShared<FString>("foo"));
 	Options_CB.Add(MakeShared<FString>("bar"));
 	Options_CB.Add(MakeShared<FString>("fuzz"));
+
+	Options_LV.Add(MakeShared<ListViewData>("Lorem", "ipsum"));
+	Options_LV.Add(MakeShared<ListViewData>("Lorem", "ipsum"));
+	Options_LV.Add(MakeShared<ListViewData>("Lorem", "ipsum"));
+
 	ChildSlot
 	[
 		SNew(SVerticalBox)
@@ -76,7 +82,7 @@ void SMyCustomWidget::Construct(const FArguments& inArgs)
 			SNew(SHorizontalBox)
 				+ SHorizontalBox::Slot()
 				[
-					SNew(STextBlock).Text(FText::FromString("Test CheckBox"))
+					SNew(STextBlock).Text(FText::FromString("Test ComboBox"))
 				]
 				+ SHorizontalBox::Slot()
 				[
@@ -90,6 +96,50 @@ void SMyCustomWidget::Construct(const FArguments& inArgs)
 								.Text(this, &SMyCustomWidget::GetCurrentSelectionCB)
 						]
 						
+				]
+		]
+
+		+ SVerticalBox::Slot()
+		.AutoHeight()
+		[
+			SNew(SHorizontalBox)
+				+ SHorizontalBox::Slot()
+				[
+					SNew(STextBlock).Text(FText::FromString("Test Slider"))
+				]
+				+ SHorizontalBox::Slot()
+				[
+					SNew(SSlider)
+						.Value(0.5f)
+						.MinValue(0.0f)
+						.MaxValue(1.0f)
+						.OnValueChanged(this, &SMyCustomWidget::HandleSliderValueChange)
+				]
+		]
+
+		+ SVerticalBox::Slot()
+		.AutoHeight()
+		[
+			SNew(SHorizontalBox)
+				+ SHorizontalBox::Slot()
+				[
+					SNew(SListView<TSharedPtr<FString>>)
+						.ListItemsSource(&Options_CB)
+						.OnGenerateRow(this, &SMyCustomWidget::GeneratedListRow)
+						.OnSelectionChanged(this, &SMyCustomWidget::HandleListSelectionChanged)
+				]
+		]
+
+		+ SVerticalBox::Slot()
+		.AutoHeight()
+		[
+			SNew(SHorizontalBox)
+				+ SHorizontalBox::Slot()
+				[
+					SNew(SListView<TSharedPtr<ListViewData>>)
+						.ListItemsSource(&Options_LV)
+						.OnGenerateRow(this, &SMyCustomWidget::GeneratedListRowLVD)
+						.OnSelectionChanged(this, &SMyCustomWidget::HandleListSelectionChangedLVD)
 				]
 		]
 
@@ -130,4 +180,62 @@ void SMyCustomWidget::HandleSelectionChanged(TSharedPtr<FString> NewSelection, E
 FText SMyCustomWidget::GetCurrentSelectionCB() const
 {
 	return Selected_CB.IsValid()? FText::FromString(*Selected_CB) : FText::GetEmpty();
+}
+
+void SMyCustomWidget::HandleSliderValueChange(float newValue)
+{
+	value = newValue;
+	UE_LOG(LogTemp, Log, TEXT("new val %f"), value);
+}
+
+TSharedRef<ITableRow> SMyCustomWidget::GeneratedListRow(TSharedPtr<FString> item,const TSharedRef<STableViewBase>& OwnerTable)
+{
+	return SNew(STableRow<TSharedPtr<FString>>, OwnerTable)
+		[
+			SNew(SHorizontalBox)
+				+ SHorizontalBox::Slot()
+				[
+					SNew(STextBlock).Text(FText::FromString("-------->"))
+				]
+				+ SHorizontalBox::Slot()
+				[
+					SNew(STextBlock).Text(FText::FromString(*item))
+				]
+				+ SHorizontalBox::Slot()
+				[
+					SNew(STextBlock).Text(FText::FromString("<--------"))
+				]
+		];
+}
+
+void SMyCustomWidget::HandleListSelectionChanged(TSharedPtr<FString> selectedItem, ESelectInfo::Type SelectInfo)
+{
+	if (selectedItem.IsValid())
+	{
+		DebugHeader::ScreenPrint(*selectedItem, FColor::Orange);
+	}
+}
+
+TSharedRef<ITableRow> SMyCustomWidget::GeneratedListRowLVD(TSharedPtr<ListViewData> item, const TSharedRef<STableViewBase>& OwnerTable)
+{
+	return SNew(STableRow<TSharedPtr<FString>>, OwnerTable)
+		[
+			SNew(SHorizontalBox)
+				+ SHorizontalBox::Slot()
+				[
+					SNew(STextBlock).Text(FText::FromString(*item.Get()->foo))
+				]
+				+ SHorizontalBox::Slot()
+				[
+					SNew(STextBlock).Text(FText::FromString(*item.Get()->bar))
+				]
+		];
+}
+
+void SMyCustomWidget::HandleListSelectionChangedLVD(TSharedPtr<ListViewData> selectedItem, ESelectInfo::Type SelectInfo)
+{
+	if (selectedItem.IsValid())
+	{
+		DebugHeader::ScreenPrint(*selectedItem.Get()->bar, FColor::Orange);
+	}
 }
