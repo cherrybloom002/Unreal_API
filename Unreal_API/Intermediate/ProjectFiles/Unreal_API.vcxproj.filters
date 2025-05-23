@@ -64,6 +64,9 @@
     <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets\MyCustomWidget.cpp">
       <Filter>Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets\SceneAssetViewer.cpp">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets</Filter>
+    </ClCompile>
     <Filter Include="Plugins\QuickActions\Source\QuickActions\Public">
       <UniqueIdentifier>{D44EDDEE-2359-3A26-BDAE-C60BAFE50789}</UniqueIdentifier>
     </Filter>
@@ -80,6 +83,9 @@
       <UniqueIdentifier>{4AB53348-D779-3B43-9CBC-D527FCAAFF83}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets\MyCustomWidget.h">
+      <Filter>Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets\SceneAssetViewer.h">
       <Filter>Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets</Filter>
     </ClInclude>
     <None Include="..\..\Plugins\QuickActions\QuickActions.uplugin">

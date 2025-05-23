@@ -499,9 +499,14 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\Plugins\QuickActions\Source\QuickActions\Private\SlateWidgets\SceneAssetViewer.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
     <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\QuickActions.h"/>
     <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\AssetActions\QuickAssetAction.h"/>
     <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets\MyCustomWidget.h"/>
+    <ClInclude Include="..\..\Plugins\QuickActions\Source\QuickActions\Public\SlateWidgets\SceneAssetViewer.h"/>
     <None Include="..\..\Plugins\QuickActions\QuickActions.uplugin"/>
     <None Include="..\..\Plugins\QuickActions\Resources\Icon128.png"/>
     <None Include="..\..\Source\Unreal_API\Unreal_API.Build.cs"/>

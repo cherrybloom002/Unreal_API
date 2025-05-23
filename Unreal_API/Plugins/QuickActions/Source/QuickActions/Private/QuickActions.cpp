@@ -8,6 +8,7 @@
 #include "ObjectTools.h"
 
 #include "SlateWidgets/MyCustomWidget.h"
+#include "SlateWidgets/SceneAssetViewer.h"
 
 #define LOCTEXT_NAMESPACE "FQuickActionsModule"
 
@@ -44,20 +45,11 @@ TSharedRef<FExtender> FQuickActionsModule::CustomCBExtender(const TArray<FString
 		//1- Hook Menu
 		//2- MenuBuild
 		//3- Function
-
-		/*2 Examples of Menu extensions:
-			The first one will be positioned as the first in the "Bulk Operations" cathegory
-			while the second one will be after "Delete"*/
 		MenuExtender->AddMenuExtension(FName("PathContextBulkOperations"), //1- Hook Menu
 			EExtensionHook::First,
 			TSharedPtr<FUICommandList>(), //quick commands
 			FMenuExtensionDelegate::CreateRaw(this, &FQuickActionsModule::AddCBMenuEntry) //2- MenuBuild
 		);
-		/*MenuExtender->AddMenuExtension(FName("Delete"), //1- Hook Menu
-			EExtensionHook::After, 
-			TSharedPtr<FUICommandList>(),
-			FMenuExtensionDelegate::CreateRaw(this, &FQuickActionsModule::AddCBMenuEntry) //2- MenuBuild
-			);*/
 		SelectedFolderPaths = SelectedPaths;
 	}
 	return MenuExtender;
@@ -137,8 +129,18 @@ void FQuickActionsModule::RegisterSlateTab()
 {
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
 		FName("TestTab"),
-		FOnSpawnTab::CreateRaw(this, &FQuickActionsModule::OnSpawnTestTab))
-		.SetDisplayName(FText::FromString(TEXT("Nomad tab test")));
+		FOnSpawnTab::CreateRaw(this, &FQuickActionsModule::OnSpawnTestTab)
+		);
+
+	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(
+		FName("SceneAssetViewer"),
+		FOnSpawnTab::CreateLambda([](const FSpawnTabArgs& args) {
+			return SNew(SDockTab)
+				[
+					SNew(SSceneAssetViewerWidget)
+				];
+			})
+	);
 }
 void FQuickActionsModule::OnSpawnTabClicked()
 {
