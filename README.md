@@ -5,6 +5,7 @@ The copyright of the original material, exercises, and concepts belongs to AIV.
 This repository is intended **only for educational and learning purposes** and does not claim ownership of any copyrighted material from AIV.
 
 ***For proper viewing is suggested to manualy compile the project through the .sln file due to errors that can be caused by Unreal Engine. If the .sln file can't be found, then it needs to be generated.***
+***If the ScriptedAssetActions aren't visible when right clicking on an asset while being in unreal, then by following /All/Plugins/QuickActions and compiling the BluePrint present there the problem should be fixed***
 
 # Project Content
 
@@ -45,7 +46,7 @@ Duplicates all currently selected assets in the editor a specified number of tim
 Finds and resolves redirector assets within the /Game directory to ensure clean asset references;
 
 ## SlateWidgets
-
+>Can be viewed in the MenuBar-> "Window"
 ### MyCustomWidget
 A fully interactive Slate widget demonstrating multiple UI elements and input handling:
 - Text blocks for dynamic display;
